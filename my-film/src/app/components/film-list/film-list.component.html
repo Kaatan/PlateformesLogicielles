@@ -1,0 +1,129 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="container-fluid" GridLayout >
+
+    
+      
+    <div class = "row row-cols-5 g-2">
+    
+        <div *ngFor="let item of list">
+            
+
+                <div class="col">
+            
+                    <div class="card h-100 p-2 bg-light " style="width: 18rem;">
+                        <h5 class="card-title">{{item.titre}}</h5>
+
+                        <p class="card-text">{{item.realisateur.prenom}} {{item.realisateur.nom}}</p>
+
+                        <a [routerLink] ="['/my-films', item.id]" class="card-link">Details</a>
+                    
+                        <div>
+                            <button class="btn btn-primary card-button " style="height:40px; width:50px" data-bs-toggle="modal" data-bs-target="#modalEditCreate" (click)="setEditMode(true)" (click)="setFilm(item.id)"> <i class="material-icons">update</i>  </button>
+
+                            <button class="btn btn-danger " style="height:40px; width:50px" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="setFilm(item.id)"><i class="material-icons ">delete</i></button>
+        
+                        </div>
+                    
+                    </div>
+                </div>
+           
+
+        </div>   
+
+
+        
+                
+           
+            
+     
+        
+    </div>
+    <p>Create Film : </p>
+    <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalEditCreate" style="height:40px; width:50px" (click)="setEditMode(false)" (click)="this.filmForm.reset();" > <i class="material-icons">create</i>  </button>
+
+
+    
+
+    <div class="modal" tabindex="-1" id="modalDelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Suppression du film</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  ></button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes vous sûr de vouloir supprimer ce film ?</p>
+                    <p *ngIf="actualFilm!==undefined">{{actualFilm!.titre!}}</p>
+                    <!-- Bug car actualFilm est non défini -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteFilm()">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   
+
+
+    <div class="modal fade" tabindex="-1" id="modalEditCreate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" *ngIf="editMode; else elseBlock" >Editer un Film</h5>
+                    <ng-template #elseBlock>
+                        <h5 class="modal-title"  >Ajouter un Film</h5>
+                    </ng-template>
+                    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form [formGroup] = "filmForm"  (ngSubmit) = "onSubmit()">
+                        <div>
+                            <label for="nomLabelInput" class="form-label"  >Titre</label>
+                            <input id="nomLabelInput" type="text" class="form-control" formControlName="titre">
+                        </div>
+                        <div>
+                            <label for="dureeLabelInput" class="form-label"  >Durée</label>
+                            <input id="dureeLabelInput" type="number" class="form-control" formControlName="duree">
+                        </div>
+                            <div>
+                            <label for="idRealLabelInput" class="form-label"  >Réalisateur</label>
+
+                            <select id="idRealLabelInput" class="form-select" formControlName="idReal"  >
+
+                                <option selected *ngIf="editMode==false">Choose a realisateur</option>
+
+                                <option *ngFor="let item of realisateurs" value="{{item.id}}">{{item.prenom}} {{item.nom}}</option>
+                                
+                            </select>
+
+                            
+
+                            
+
+                        </div>
+                            <button type=”submit” class="btn btn-primary" [disabled]="filmForm.invalid">Valider</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    
+                    <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirmer</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a class="btn btn-primary p-2" href=""> Retour au menu principal </a>
+    </div>
+
+
+</div>
+

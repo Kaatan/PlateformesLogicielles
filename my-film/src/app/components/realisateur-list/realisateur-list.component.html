@@ -1,0 +1,113 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="container-fluid" GridLayout >
+
+    
+      
+    <div class = "row row-cols-5 g-2">
+    
+        <div *ngFor="let item of list">
+            
+
+                <div class="col">
+            
+                    <div class="card h-100 p-2 bg-light " style="width: 18rem;">
+                        <h5 class="card-title">{{item.prenom}} {{item.nom}}</h5>
+
+
+                        <a [routerLink] ="['/my-realisateurs', item.id]" class="card-link">Details</a>
+                    
+                        <div>
+                            <button class="btn btn-primary card-button " style="height:40px; width:50px" data-bs-toggle="modal" data-bs-target="#modalEditCreate" (click)="setEditMode(true)" (click)="setReal(item.id)"> <i class="material-icons">update</i>  </button>
+
+                            <button class="btn btn-danger " style="height:40px; width:50px" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="material-icons ">delete</i></button>
+        
+                        </div>
+                    
+                    </div>
+                </div>
+           
+
+        </div>   
+
+
+        
+                
+           
+<!--             
+     
+        
+    </div>
+    <p>Create Realisateur : </p>
+    <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalEditCreate" style="height:40px; width:50px" (click)="setEditMode(false)" (click)="this.realForm.reset();" > <i class="material-icons">create</i>  </button>
+
+
+    
+
+    <div class="modal" tabindex="-1" id="modalDelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Titre du modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes vous sûr de vouloir supprimer ce realisateur ?</p>
+                    <p *ngIf="actualReal!==undefined">{{actualReal!.prenom!}} {{actualReal!.nom!}}</p>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteReal()">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   
+
+
+    <div class="modal fade" tabindex="-1" id="modalEditCreate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" *ngIf="editMode; else elseBlock" >Editer un Realisateur</h5>
+                    <ng-template #elseBlock>
+                        <h5 class="modal-title"  >Ajouter un Realisateur</h5>
+                    </ng-template>
+                    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form [formGroup] = "realForm"  (ngSubmit) = "onSubmit()">
+                        <div>
+                            <label for="nomLabelInput" class="form-label"  >Nom</label>
+                            <input id="nomLabelInput" type="text" class="form-control" formControlName="nom">
+                        </div>
+                        <div>
+                            <label for="prenomLabelInput" class="form-label"  >Prenom</label>
+                            <input id="prenomLabelInput" type="number" class="form-control" formControlName="prenom">
+                        </div>
+                        
+                            <button type=”submit” class="btn btn-primary" [disabled]="realForm.invalid">Valider</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div>
+        <a class="btn btn-primary p-2" href=""> Retour au menu principal </a>
+    </div>
+
+
+</div>
+

@@ -1,0 +1,33 @@
+<!-- <p>film-details works!</p>
+
+<p>ID of film is : {{id}}</p> -->
+
+
+<div class="container-fluid w-50 bg-light p-2 " >
+    <p class="h4">
+        {{film?.titre}} 
+    </p>
+    <br>
+    Durée : {{film?.duree}} secondes
+    <br> Réalisé par {{realisateur?.prenom}}  {{realisateur?.nom}} (né en {{realisateur?.dateNaissance}})
+    <br> 
+    <div *ngIf="realisateur?.filmRealises?.length!=0" >
+        Autres films de ce réalisateur : 
+        <div class="col"   *ngFor="let item of realisateur?.filmRealises">
+            
+            <div class="card h-100 p-2 bg-light">
+                <h5 class="card-title">{{item.titre}}</h5>
+                <!-- <p class="cart-text">Un peu de texte</p> -->
+                <a [routerLink] ="['/my-films', item.id]" class="card-link">Details</a>
+                
+            </div>
+        </div>
+    </div>
+    <div *ngIf="realisateur?.filmRealises?.length == 0">
+        Pas d'autres Films réalisés par ce réalisateur.
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary p-2" href="my-films"  > Retour à la liste des films </a>
+</div>
